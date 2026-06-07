@@ -4,7 +4,7 @@ class Solution:
     def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
         adj_lst = defaultdict(list)
 
-        # create a adjacency list
+        # create a adjacency list 
         for u, v in edges:
             adj_lst[u].append(v)
             adj_lst[v].append(u)
