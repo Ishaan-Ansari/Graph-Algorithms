@@ -1,4 +1,4 @@
-# Graph-Algorithms
+# Graph Algorithms
 
 This space serves as a personal log where I implement and track my progress on solving problems related to graph data structures.
 
