@@ -18,12 +18,17 @@ Here is the list of concepts and problems I've implemented so far:
 
 To run any of these solutions locally, clone the repository and execute the Python scripts directly from your terminal:
 
-```bash
 # Clone the repository
-git clone [https://github.com/Ishaan-Ansari/Graph-Algorithms.git](https://github.com/Ishaan-Ansari/Graph-Algorithms.git)
+```bash
+git clone https://github.com/Ishaan-Ansari/Graph-Algorithms.git
+```
 
 # Navigate to the directory
+```bash
 cd Graph-Algorithms
+```
 
 # Run a specific script
+```bash
 python 02_BFS_traversal.py
+```
