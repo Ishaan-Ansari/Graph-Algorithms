@@ -6,22 +6,23 @@ class BFS:
 
     def traverse(self, start):
         visited = [0]*len(self.adj_list)
-        queue = deque([start])
+        q = deque([start])
 
-        while queue:
-            node = queue.popleft()
+        while q:
+            node = q.popleft()
             if not visited[node]:
                 print(node, end=' ')
                 visited[node] = 1
                 for neighbor in self.adj_list[node]:
                     if not visited[neighbor]:
-                        queue.append(neighbor)
+                        q.append(neighbor)
 
 
 edges = [[1,0], [0,2], [0,5], [3,2], [3,4]]
 
-# Create an adjacency list
+# Create adjacency list
 adj_list = defaultdict(list)
+
 for u, v in edges:
     adj_list[u].append(v)
     adj_list[v].append(u)
@@ -29,3 +30,4 @@ for u, v in edges:
 obj = BFS(adj_list)
 print("BFS Traversal starting from node 0:")
 obj.traverse(0)
+
