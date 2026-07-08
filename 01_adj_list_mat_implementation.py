@@ -1,29 +1,24 @@
-"""
-Adjacency list & matrix implementation
-"""
-
+"""Adjacency list & matrix implementation"""
 from collections import defaultdict
+
 edges = [[1,2], [2,3], [3,4], [4,2], [1,3]]
 
 N = 4
 
-adj_lst = defaultdict(list)
+adj_list = defaultdict(list)
 
 for u, v in edges:
-    adj_lst[u].append(v)
-    adj_lst[v].append(u)
-    
-# Adjecency list
-print(dict(adj_lst))
+    adj_list[u].append(v)
+    adj_list[v].append(u)  
 
-mat = [[0 for _ in range(N)] for _ in range(N)]
+print(dict(adj_list))
+
+adj_mat = [[0 for _ in range(N)] for _ in range(N)]
 
 for u, v in edges:
-    # print(edge)
     u -= 1
     v -= 1
-    mat[u][v] = 1
-    mat[v][u] = 1
+    adj_mat[u][v] = 1
+    adj_mat[v][u] = 1
 
-# Adjacency matrix
-print(mat)
+print(adj_mat)
