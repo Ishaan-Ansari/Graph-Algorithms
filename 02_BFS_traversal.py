@@ -30,4 +30,3 @@ for u, v in edges:
 obj = BFS(adj_list)
 print("BFS Traversal starting from node 0:")
 obj.traverse(0)
-
