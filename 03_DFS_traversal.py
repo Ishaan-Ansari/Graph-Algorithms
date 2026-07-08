@@ -16,10 +16,11 @@ class DFS:
                 if not visited[neighbor]:
                     self._dfs_helper(neighbor, visited)
 
+# 1. Create adjacency list
 edges = [[1,0], [0,2], [0,5], [3,2], [3,4]]
 
-# Create an adjacency list
 adj_list = defaultdict(list)
+
 for u, v in edges:
     adj_list[u].append(v)
     adj_list[v].append(u)
