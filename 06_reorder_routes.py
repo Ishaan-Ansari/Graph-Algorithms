@@ -10,6 +10,7 @@ class Solution:
             for neighbor in adj_lst[start_node]:
                 node, cost = neighbor
                 if not visited[node]:
+                    # If cost is 1, the original road points away from City 0.
                     if cost == 1:
                         self.count += 1
                     self._dfs(node, adj_lst, visited)
@@ -18,7 +19,9 @@ class Solution:
         adj_lst = defaultdict(list)
 
         for u, v in connections:
+            # real road goes from u -> v
             adj_lst[u].append((v, 1))
+            # Fake road goes from v -> u
             adj_lst[v].append((u, 0))
 
         visited = [0]*n
@@ -26,3 +29,5 @@ class Solution:
         self._dfs(0, adj_lst, visited)
 
         return self.count
+
+        
