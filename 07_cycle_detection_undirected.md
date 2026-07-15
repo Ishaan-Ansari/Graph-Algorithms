@@ -5,14 +5,16 @@
 > Note: The graph can have multiple component. 
 
 ## Intuition
-Provide a high-level overview of the thought process behind your solution. 
-*Why does this approach work?* For instance, you might explain that in a Depth First Search (DFS), if you encounter a node that has already been visited and is not the immediate parent of the current node, a cycle must exist.
+
+- The hook here is simple, While traversal if you encounter a node that has already been visited and is not immediate parent of the current node, a cycle exist.
+- Concept of parent - In case of ```UNDIRECTED GRAPH``` when we are iterating over ```adj_lst``` you'll encounter the node from where you just came from. To avoid false positives, we track this "parent" node and simply skip it during our check. 
+- Here false positive means if we don't track parent the program will understand the parent node as a cycle completion and it will return ```True```
+- Because undirected edges are bidirectional, traveling from a parent node $A$ to a child node $B$ means $A$ remains in $B$'s neighbor list. Without tracking the parent, the algorithm will look back at $A$, see that it is already visited, mistake this back-and-forth path for a completed cycle, and incorrectly return ```True```.
 
 ## Approach
-Break down your algorithm into clear, logical steps:
 1. Initialize a `visited` array to keep track of processed nodes.
 2. Loop through all vertices from `0` to `V-1` to ensure disconnected components are handled.
-3. For each unvisited vertex, initiate a Breadth-First Search (BFS) or Depth-First Search (DFS).
+3. Check if the vertex is NOT visited and then mark it as true.
 4. During traversal, keep track of the `parent` node. If an adjacent node is already visited and is *not* the parent, return `True`.
 5. If the traversal completes without finding such a node, return `False`.
 
