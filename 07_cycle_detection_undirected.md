@@ -56,5 +56,5 @@ class Solution:
 ```
 
 ## Complexity Analysis
-* **Time Complexity:** **O(V + E)** — Explain why (e.g., in the worst case, you visit every vertex and every edge).
-* **Space Complexity:** **O(V)** — Explain the space overhead (e.g., required for the `visited` array and the recursion stack or queue).
+* **Time Complexity:** **O(V + E)** — in the worst case, you visit every vertex and every edge.
+* **Space Complexity:** **O(V)** — required for the `visited` array and the recursion stack
