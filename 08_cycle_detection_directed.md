@@ -4,11 +4,16 @@
 > Given a Directed Graph with V vertices (Numbered from 0 to V-1) and E edges, check whether it contains any cycle or not. The graph is represented as a 2D vector edges[][], where each entry edges[i] = [u, v] denotes an edge from vertex u to v.
 
 ## Intuition
+- The initial thought might be to approach it like simple DFS and if we enounter the visited node again then it's a cycle
+    - But the catch here is - 
+        - Suppose there's a node $A \rightarrow B, B  \rightarrow C$ and then again from $A  \rightarrow C$, does it look like a cycle ?
+        - If you run a DFS starting at $A$, you might first travel $A \rightarrow B \rightarrow C$. The algorithm marks $C$ as "visited." When the search backtracks to $A$ and checks its other connecting edge ($A \rightarrow C$), it sees that $C$ is already marked as "visited." and it falsely returns as cycle
 
+- To resolve this we need to have array along side ```visited``` array inorder to distinguish between node we visited sometime ago versus a node that is part of our current path
+- ```in_stack``` tracks node in our current ongoing DFS path, we mark a node `True` or `1` when we enter the loop and `False` or `0` when we backtrack out of it
+- A True cycle only exists if we encounter a node that is currently marked as ```True``` in our ```in_stack```
 
-## Approach
-
-## Code Implementation
+## Code 
 
 ```python
 from collections import defaultdict
@@ -28,7 +33,7 @@ class Solution:
                 elif in_stack[neighbor]:
                     return True
                         
-            in_stack[node] = False
+            in_stack[node] = 0
             
         return False
                 

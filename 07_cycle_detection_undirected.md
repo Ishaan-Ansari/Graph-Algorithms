@@ -11,14 +11,7 @@
 - Here false positive means if we don't track parent the program will understand the parent node as a cycle completion and it will return ```True```
 - Because undirected edges are bidirectional, traveling from a parent node $A$ to a child node $B$ means $A$ remains in $B$'s neighbor list. Without tracking the parent, the algorithm will look back at $A$, see that it is already visited, mistake this back-and-forth path for a completed cycle, and incorrectly return ```True```.
 
-## Approach
-1. Initialize a `visited` array to keep track of processed nodes.
-2. Loop through all vertices from `0` to `V-1` to ensure disconnected components are handled.
-3. Check if the vertex is NOT visited and then mark it as true.
-4. During traversal, keep track of the `parent` node. If an adjacent node is already visited and is *not* the parent, return `True`.
-5. If the traversal completes without finding such a node, return `False`.
-
-## Code Implementation
+## Code 
 
 ```python
 from collections import defaultdict
