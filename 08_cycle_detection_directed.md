@@ -11,7 +11,7 @@
 
 - To resolve this we need to have array along side ```visited``` array inorder to distinguish between node we visited sometime ago versus a node that is part of our current path
 - ```in_stack``` tracks node in our current ongoing DFS path, we mark a node `True` or `1` when we enter the loop and `False` or `0` when we backtrack out of it
-- A True cycle only exists if we encounter a node that is currently marked as ```True``` in our ```in_stack```
+- A true cycle only exists if we encounter a node that is currently marked as ```True``` in our ```in_stack```
 
 ## Code 
 
