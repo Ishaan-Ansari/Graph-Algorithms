@@ -1,4 +1,4 @@
-# 10. Topological Sort
+# 11. Topological Sort
 
 ## Problem Statement
  > Given a Directed Acyclic Graph (DAG) with V vertices labeled from `0` to `V-1`.The graph is represented using an adjacency list where adj[i] lists all nodes connected to node. Find any Topological Sorting of that Graph.
