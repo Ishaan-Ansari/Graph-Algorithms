@@ -33,7 +33,7 @@ We'll use the following strategy:
 3. Remove it from the graph.
 4. Repeat.
 
-> **Note:** Instead of actually removing nodes from the graph (and destroying our input!), we'll use a hash map to track each node's indegree. When we add a node to the topological ordering, we'll decrement the indegree of that node's neighbors — representing that those nodes now have one fewer incoming edge.
+> **Note:** Instead of actually removing nodes from the graph (and destroying our input!), we'll use a hash map to track each node's indegree. When we add a node to the topological ordering, we'll decrement the indegree of that node's neighbors.
 
 ## Code
 
