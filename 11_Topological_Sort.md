@@ -50,42 +50,52 @@ graph LR
 ```
 
 ```python
-class Solution:
-    def topoSort(self, V, adj):
-        # First, calculate the indegree of the nodes
-        indegree = {node: 0 for node in range(len(adj))}
-        for index, neighbors in enumerate(adj):
-            for v in neighbors:
-                indegree[v] += 1
+from collections import defaultdict
 
-        # Track nodes with no incoming edges
-        node_with_no_incoming_edges = []
-        for node in range(len(adj)):
-            if indegree[node] == 0:
-                node_with_no_incoming_edges.append(node)
+adj = [[], [], [3], [1], [0, 1], [0, 2]]
+print("Adjacency List: ", adj)
 
-        # Initially, no nodes are in our ordering
-        topological_ordering = []
+# Calculate indegree
+indegree = {node: 0 for node in range(len(adj))}
 
-        # As long as there are nodes with no incoming edges
-        # that can be added to the ordering
-        while len(node_with_no_incoming_edges) > 0:
-            node = node_with_no_incoming_edges.pop()
-            topological_ordering.append(node)
+for u, v in enumerate(adj):
+    neighbor = v
+    for i in neighbor:
+        indegree[i] += 1
 
-            # Decrement the indegree of that node's neighbors
-            for neighbor in adj[node]:
-                indegree[neighbor] -= 1
-                # A neighbor with no more incoming edges is ready to add
-                if indegree[neighbor] == 0:
-                    node_with_no_incoming_edges.append(neighbor)
+print("intitial indegree: ", indegree)
 
-        # We've run out of nodes with no incoming edges
-        if len(topological_ordering) == len(adj):
-            return topological_ordering
-        else:
-            raise Exception("Graph has a cycle! No topological ordering exists.")
+node_with_no_incoming_edges = []
+topo_sort = []
+
+# for all the nodes with indegree zero, append them into a temp. list
+for k, v in indegree.items():
+    if v == 0:
+        node_with_no_incoming_edges.append(k)
+        
+print("Starting nodes with 0 indegree: ", node_with_no_incoming_edges)
+        
+# As long as there are nodes with no incoming edges
+while len(node_with_no_incoming_edges) > 0:
+    node = node_with_no_incoming_edges.pop()
+    topo_sort.append(node)
+    
+    # decrement the indegree of the node
+    for neighbor in adj[node]:
+        indegree[neighbor] -= 1
+        
+        # if a neighbor with no more incoming nodes then
+        if indegree[neighbor] == 0:
+            node_with_no_incoming_edges.append(neighbor)
+            
+# if we run out of all nodes
+if len(topo_sort) == len(adj):
+    print("Final topological Sort: ", topo_sort)
+else:
+    print("The graph has a Cycle!")
 ```
+
+![alt text](images/topo_sort.png)
 
 ## Complexity Analysis
 
