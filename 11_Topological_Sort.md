@@ -99,8 +99,19 @@ else:
 
 ## Complexity Analysis
 
-* **Time Complexity:** **O(V + E)** — in the worst case, you visit every vertex and every edge.
-* **Space Complexity:** **O(V)** — for the indegree map and the list of nodes ready to process, each of which holds at most `V` entries.
+* **Time Complexity:** 
+    - Determine the _indegree_ for each node - $O(M)$
+    - For nodes with no incoming edges - $O(N)$
+    - Add nodes until we run out of nodes with no incoming edges, This will go $N$ times in the worst case scenario
+        - Inside loop we also decrement the _indegree_ of the nodes we added in the list, Overall we'll endup doing one decrement for each edge - $O(M)$
+
+    - Overall time complexity is $O(M+N)$
+
+* **Space Complexity:** 
+    - `indegree` - $O(N)$
+    - `node_with_no_incoming_edges` - In a graph with NO edges, in the worst case it will be $O(N)$
+    - `topo_sort` - graph with no cycle, this will have every node $O(N)$
+    - Overall space complexity will be $O(N)$
 
 ## References
 
