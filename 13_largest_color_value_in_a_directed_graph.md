@@ -40,61 +40,69 @@ Return the <em>largest color value</em> of any valid path in the given graph, or
 
 ## Intuition
 - So my initial intuition about this problem is to perform a DFS from each node and calculate the most frequently occuring color
+    - But here is catch, suppose there's that meets at a junction and then have a common path
+    - As per my initial intuition I've to calculate the frequency for that portion multiple times?
 
-```mermaid
-flowchart TD
-    %% Define reusable styles for node colors
-    %% Rx and Ry ensure nodes are perfectly round like in drawing.
-    classDef redNode fill:#FFCDCD,stroke:#EE0000,stroke-width:2px,rx:100,ry:100;
-    classDef blueNode fill:#CCE5FF,stroke:#0055FF,stroke-width:2px,rx:100,ry:100;
-    classDef purpleNode fill:#E6CCFF,stroke:#800080,stroke-width:2px,rx:100,ry:100;
-
-    %% --- MAIN SUBGRAPH (Purple Oval Group) ---
-    %% This mimics the purple hand-drawn oval grouping the left branch and central convergence point.
-    subgraph ClusterLeftGroup [" "]
-        direction TD
-        %% Define subgraph border style (purple dash mimicking the hand sketch)
-        style ClusterLeftGroup fill:#fff0,stroke:#800080,stroke-width:3px,stroke-dasharray: 8 8,rx:80,ry:80;
-
-        %% Nodes within the purple group
-        Node1(( )):::redNode
-        Node2(( )):::blueNode
-        Node5(( )):::redNode
-
-        %% Internal connections
-        Node1 --> Node2
-        Node2 --> Node5
-    end
-
-    %% --- NODES OUTSIDE GROUP ---
-    %% Right branch nodes
-    Node3(( )):::blueNode
-    Node4(( )):::blueNode
-
-    %% Bottom chain nodes
-    Node6(( )):::purpleNode
-    Node7(( )):::purpleNode
-
-    %% --- EXTERNAL CONNECTIONS ---
-    %% Right branch flow
-    Node3 --> Node4
-    %% Right branch convergence into central node
-    Node4 --> Node5
-
-    %% Central flow to bottom
-    Node5 --> Node6
-    Node6 --> Node7
-
-    %% Global link styling to make all arrows red as per the drawing
-    linkStyle default stroke:#EE0000,stroke-width:2px;
-```
+> [!NOTE]
+> Since this problem involves DP along with topo sort I'll be skipping it for now [03/08/2026].
 
 ## Code 
 
 ```python
+from collections import defaultdict
+
 class Solution:
+    def __init__(self):
+        self.ans = 0
+
+    def _dfs(self, adj_lst, visited, node):
+        if not visited[node]:
+            visited[node] = 1
+
+            for neighbor in adj_lst[node]:
+                if not visited[node]:
+                    self._dfs(adj_lst, visited, neighbor)
+
     def largestPathValue(self, colors: str, edges: List[List[int]]) -> int:
-        
+        n = len(colors)
+        adj_lst = defaultdict(list)
+
+        for u, v in edges:
+            adj_lst[u].append(v)
+
+        self.max_freq = 0
+        self.has_cycle = False
+
+        path_visited = [False] * n
+
+        current_counts = [0]*26
+
+        def _dfs(node):
+            if self.has_cycle:
+                return
+
+            if path_visited[node]:
+                self.has_cycle = True
+                return
+
+            path_visited[node] = True
+            color_idx = ord(colors[node])-ord('a')
+            current_counts[color_idx] += 1
+
+            self.max_freq = max(self.max_freq, current_counts[color_idx])
+
+            for neighbor in adj_lst[node]:
+                _dfs(neighbor)
+
+            path_visited[node] = False
+            current_counts[color_idx] -= 1
+
+        for i in range(n):
+            if self.has_cycle:
+                break
+            _dfs(i)
+
+        return -1 if self.has_cycle else self.max_freq        
 ```
 
 ## Complexity Analysis

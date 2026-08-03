@@ -25,6 +25,8 @@ for u, v in edges:
     adj_list[u].append(v)
     adj_list[v].append(u)
 
+print(dict(adj_list))
+
 obj = DFS(adj_list)
 print("DFS Traversal starting from node 0:")
 obj.traverse(0)
