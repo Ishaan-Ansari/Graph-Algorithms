@@ -57,6 +57,45 @@ graph LR
 ## Code 
 
 ```python
+from collections import defaultdict, deque
+import heapq
+
+class Solution:
+    def dijkstra(self, V: int, edges: list[list[int]], src: int) -> list[int]:
+        # code here
+        lst = defaultdict(list)
+        for u, v, w in edges:
+            lst[u].append((v, w))
+            lst[v].append((u, w))
+            
+        # initially I thought visited = [0]*V
+        # but there's an issue with that 
+        # If every node starts with distance 0, 
+        # Dijkstra thinks every node is already reached with zero cost
+        dist = [float('inf')]*V
+        dist[src] = 0
+        
+        hq = []
+        # Min-Heap stores pairs of (current_distance, src)
+        heapq.heappush(hq, (0, src))
+        
+        while hq:
+            curr_dist, node = heapq.heappop(hq)
+            
+            # If we found a longer path to node than already recorded, skip it
+            if curr_dist > dist[node]:
+                continue
+            
+            # explore all path of node
+            for v, weight in lst[node]:
+                new_dist = curr_dist + weight
+                
+                # found a shorter path to neighbor v
+                if new_dist < dist[v]:
+                    dist[v] = new_dist
+                    heapq.heappush(hq, (new_dist, v))
+                    
+        return dist
 ```
 
 ## Complexity Analysis
