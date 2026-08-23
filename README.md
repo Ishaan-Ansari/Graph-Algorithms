@@ -2,6 +2,9 @@
 
 This space serves as a personal log where I implement and track my progress on solving problems related to graph data structures.
 
+> [!NOTE]
+> Initially I solved some problems and directly uploaded the `.py` files. However, I felt that this approach couldn't clearly capture my thought process. I decided to switch to a more comprehensive way of solving problems, where I write down my initial thoughts, the code and the time space trade-offs. Lately, I've been condensing everything into markdown files.
+
 Here is the list of concepts and problems I've implemented so far:
 
 | # | Topic / Problem Name | File | Description |
@@ -49,5 +52,3 @@ cd Graph-Algorithms
 ```bash
 python 02_BFS_traversal.py
 ```
-> [!NOTE]
-> Initially I solved some problems and directly uploaded the `.py` files. However, I felt that this approach couldn't clearly capture my thought process. I decided to switch to a more comprehensive way of solving problems, where I write down my initial thoughts, the code and the time space trade-offs. Lately, I've been condensing everything into markdown files.
